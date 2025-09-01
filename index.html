@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palette Loading Calculator</title>
+    <link rel="stylesheet" href="theme.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Palette Loading Calculator</h1>
+            <p>Optimize your truckload shipments by calculating the most efficient palette arrangement</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Input Panel -->
+            <div class="input-panel">
+                <h2>Add Palettes</h2>
+                
+                <div class="palette-form">
+                    <div class="form-group">
+                        <label for="palette-name">Palette Name:</label>
+                        <input type="text" id="palette-name" placeholder="e.g., Electronics Pallet A">
+                    </div>
+
+                    <div class="dimensions-section">
+                        <h3>Dimensions</h3>
+                        <div class="dimension-toggle">
+                            <label>
+                                <input type="radio" name="dimension-type" value="standard" checked>
+                                Standard Sizes
+                            </label>
+                            <label>
+                                <input type="radio" name="dimension-type" value="custom">
+                                Custom Dimensions
+                            </label>
+                        </div>
+
+                        <!-- Standard Dimensions -->
+                        <div class="standard-dimensions" id="standard-dims">
+                            <div class="form-group">
+                                <label for="standard-size">Standard Palette Size:</label>
+                                <select id="standard-size">
+                                    <option value="48x40x48">48" × 40" × 48" (Standard GMA)</option>
+                                    <option value="42x42x48">42" × 42" × 48" (Block)</option>
+                                    <option value="48x48x48">48" × 48" × 48" (Square)</option>
+                                    <option value="40x48x48">40" × 48" × 48" (Euro)</option>
+                                    <option value="36x36x48">36" × 36" × 48" (Half)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Custom Dimensions -->
+                        <div class="custom-dimensions" id="custom-dims" style="display: none;">
+                            <div class="dimension-inputs">
+                                <div class="form-group">
+                                    <label for="width">Width (inches):</label>
+                                    <input type="number" id="width" min="1" max="102" placeholder="48">
+                                </div>
+                                <div class="form-group">
+                                    <label for="depth">Depth (inches):</label>
+                                    <input type="number" id="depth" min="1" max="624" placeholder="40">
+                                </div>
+                                <div class="form-group">
+                                    <label for="height">Height (inches):</label>
+                                    <input type="number" id="height" min="1" max="110" placeholder="48">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stacking-section">
+                        <h3>Stacking Options</h3>
+                        <div class="stacking-options">
+                            <label>
+                                <input type="radio" name="stacking" value="stackable" checked>
+                                <span class="radio-label">Stackable (can go on top or bottom)</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="stacking" value="bottom-only">
+                                <span class="radio-label">Bottom only (can support others)</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="stacking" value="top-only">
+                                <span class="radio-label">Top only (can go on top, but nothing on it)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="quantity">Quantity:</label>
+                        <input type="number" id="quantity" min="1" value="1" placeholder="1">
+                    </div>
+
+                    <button type="button" id="add-palette" class="btn-primary">Add Palette</button>
+                </div>
+
+                <!-- Palette List -->
+                <div class="palette-list">
+                    <h3>Added Palettes</h3>
+                    <div id="palette-items" class="palette-items">
+                        <p class="empty-state">No palettes added yet</p>
+                    </div>
+                    <div class="palette-summary">
+                        <div class="summary-item">
+                            <strong>Total Palettes: <span id="total-palettes">0</span></strong>
+                        </div>
+                        <div class="summary-item">
+                            <strong>Linear Feet: <span id="total-linear-feet">Calculate to see result</span></strong>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" id="calculate-loading" class="btn-success" disabled>
+                    Calculate Optimal Loading
+                </button>
+            </div>
+
+            <!-- Results Panel -->
+            <div class="results-panel">
+                <h2>Loading Results</h2>
+                
+                <div class="truck-info">
+                    <h3>Standard Trailer Specifications</h3>
+                    <div class="truck-specs">
+                        <div class="spec-item">
+                            <span class="spec-label">Length:</span>
+                            <span class="spec-value">52 feet (624 inches)</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Width:</span>
+                            <span class="spec-value">8.5 feet (102 inches)</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Height:</span>
+                            <span class="spec-value">9 feet (108 inches)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="loading-results" class="loading-results">
+                    <p class="empty-state">Add palettes and click "Calculate Optimal Loading" to see results</p>
+                </div>
+
+                <!-- 3D Visualization -->
+                <div class="visualization-section">
+                    <h3>3D Truck Visualization</h3>
+                    <div id="truck-visualization" class="truck-viz">
+                        <p class="empty-state">3D visualization will appear here after calculation</p>
+                    </div>
+                    <div class="viz-controls">
+                        <p class="viz-instructions">🖱️ <strong>Click and drag</strong> to rotate • <strong>Scroll</strong> to zoom • <strong>Right-click drag</strong> to pan</p>
+                        <button id="reset-view" class="btn-secondary">Reset View</button>
+                        <button id="top-view" class="btn-secondary">Top View</button>
+                        <button id="side-view" class="btn-secondary">Side View</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/palette-calculator.js"></script>
+</body>
+</html>

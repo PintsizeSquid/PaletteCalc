@@ -1,0 +1,533 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: linear-gradient(135deg, #68b0ab 0%, #696d7d 100%);
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header */
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    color: white;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* Main Content Layout */
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+/* Panel Styles */
+.input-panel, .results-panel {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    height: fit-content;
+}
+
+.input-panel h2, .results-panel h2 {
+    color: #4a5568;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    border-bottom: 3px solid #68b0ab;
+    padding-bottom: 10px;
+}
+
+/* Form Styles */
+.palette-form {
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #4a5568;
+}
+
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus, .form-group select:focus {
+    outline: none;
+    border-color: #4a5568;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Dimensions Section */
+.dimensions-section {
+    background: #f7fafc;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.dimensions-section h3 {
+    color: #4a5568;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.dimension-toggle {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 15px;
+}
+
+.dimension-toggle label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.dimension-toggle input[type="radio"] {
+    margin-right: 8px;
+    width: auto;
+}
+
+.dimension-inputs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+/* Stacking Section */
+.stacking-section {
+    background: #f7fafc;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.stacking-section h3 {
+    color: #4a5568;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.stacking-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.stacking-options label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+}
+
+.stacking-options label:hover {
+    background-color: rgba(72, 187, 120, 0.1);
+}
+
+.stacking-options input[type="radio"] {
+    margin-right: 10px;
+    width: auto;
+}
+
+.radio-label {
+    font-weight: 500;
+}
+
+/* Buttons */
+.btn-primary, .btn-success, .btn-secondary {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #68b0ab 0%, #696d7d 100%);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(104, 176, 171, 0.4);
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+    color: white;
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+}
+
+.btn-success:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(72, 187, 120, 0.4);
+}
+
+.btn-success:disabled {
+    background: #a0aec0;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.btn-secondary {
+    background: #e2e8f0;
+    color: #4a5568;
+    margin: 5px;
+}
+
+.btn-secondary:hover {
+    background: #cbd5e0;
+    transform: translateY(-1px);
+}
+
+/* Palette List */
+.palette-list {
+    border-top: 2px solid #e2e8f0;
+    padding-top: 20px;
+    margin-top: 20px;
+}
+
+.palette-list h3 {
+    color: #4a5568;
+    margin-bottom: 15px;
+}
+
+.palette-items {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 15px;
+}
+
+.palette-item {
+    background: #f7fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.palette-info {
+    flex: 1;
+}
+
+.palette-name {
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 4px;
+}
+
+.palette-details {
+    font-size: 0.9rem;
+    color: #718096;
+}
+
+.palette-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-remove {
+    background: #fed7d7;
+    color: #c53030;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-remove:hover {
+    background: #feb2b2;
+}
+
+.palette-summary {
+    background: #edf2f7;
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.summary-item {
+    font-size: 14px;
+    color: #4a5568;
+}
+
+/* Truck Info */
+.truck-info {
+    background: #f0f8ff;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.truck-info h3 {
+    color: #4a5568;
+    margin-bottom: 15px;
+}
+
+.truck-specs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.spec-item {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 10px;
+    background: white;
+    border-radius: 6px;
+}
+
+.spec-label {
+    font-size: 0.9rem;
+    color: #4a5568;
+    margin-bottom: 4px;
+}
+
+.spec-value {
+    font-weight: 600;
+    color: #4a5568;
+}
+
+/* Loading Results */
+.loading-results {
+    margin-bottom: 30px;
+}
+
+.result-summary {
+    background: #f0fff4;
+    border: 2px solid #48bb78;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.result-summary h4 {
+    color: #22543d;
+    margin-bottom: 10px;
+}
+
+.result-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #38a169;
+    display: block;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: #68d391;
+}
+
+.warning-message {
+    background: #fef5e7;
+    border: 2px solid #f6ad55;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.warning-message h4 {
+    color: #c05621;
+    margin-bottom: 8px;
+}
+
+.warning-message p {
+    color: #744210;
+}
+
+/* 3D Visualization */
+.visualization-section {
+    border-top: 2px solid #e2e8f0;
+    padding-top: 20px;
+}
+
+.visualization-section h3 {
+    color: #4a5568;
+    margin-bottom: 15px;
+}
+
+.truck-viz {
+    width: 100%;
+    height: 400px;
+    background: #f7fafc;
+    border: 2px dashed #cbd5e0;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.viz-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.viz-instructions {
+    font-size: 0.9rem;
+    color: #4a5568;
+    text-align: center;
+    margin: 0;
+    padding: 8px 12px;
+    background: #f7fafc;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
+}
+
+.viz-controls .btn-secondary {
+    margin: 2px;
+}
+
+/* Empty State */
+.empty-state {
+    color: #a0aec0;
+    font-style: italic;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .main-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .dimension-inputs {
+        grid-template-columns: 1fr;
+    }
+    
+    .truck-specs {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    .input-panel, .results-panel {
+        padding: 15px;
+    }
+    
+    .dimension-toggle {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .palette-summary {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.palette-item {
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Custom Scrollbar */
+.palette-items::-webkit-scrollbar {
+    width: 6px;
+}
+
+.palette-items::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.palette-items::-webkit-scrollbar-thumb {
+    background: #cbd5e0;
+    border-radius: 3px;
+}
+
+.palette-items::-webkit-scrollbar-thumb:hover {
+    background: #a0aec0;
+}
