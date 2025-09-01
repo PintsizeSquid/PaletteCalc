@@ -1,0 +1,2 @@
+# PaletteCalc
+Palette Loading Calculator
